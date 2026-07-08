@@ -1,0 +1,300 @@
+{
+  "projectId": "lifefundies-d66e9",
+  "discoveredAt": "2026-07-08T11:08:05.208Z",
+  "collections": {
+    "users": {
+      "exists": false,
+      "error": "Missing or insufficient permissions."
+    },
+    "guides": {
+      "exists": true,
+      "status": "active",
+      "count": 2,
+      "sampleSchema": {
+        "domainIds": "array",
+        "languages": "array",
+        "displayName": "string",
+        "isActive": "boolean",
+        "sessionPrice": "number",
+        "qualification": "string",
+        "isVerified": "boolean",
+        "domains": "array",
+        "categories": "array",
+        "rating": "number",
+        "name": "string",
+        "price": "number",
+        "uid": "string",
+        "updatedAt": "timestamp/date",
+        "education": "string",
+        "expertise": "array",
+        "reviewCount": "number",
+        "source": "string",
+        "bio": "string",
+        "yearsOfExperience": "number",
+        "isAvailable": "boolean",
+        "totalSessions": "number",
+        "photoURL": "string"
+      },
+      "samples": [
+        {
+          "id": "0NuxxdUzboNhla9D4tlAkuWlkk72",
+          "fields": {
+            "domainIds": [
+              "career",
+              "emotional",
+              "communication"
+            ],
+            "languages": [
+              "hindi"
+            ],
+            "displayName": "Asmit",
+            "isActive": true,
+            "sessionPrice": 129,
+            "qualification": "Btech",
+            "isVerified": true,
+            "domains": [
+              "career",
+              "emotional",
+              "communication"
+            ],
+            "categories": [
+              "peer-buddy",
+              "young-mentor"
+            ],
+            "rating": 5,
+            "name": "Asmit",
+            "price": 129,
+            "uid": "0NuxxdUzboNhla9D4tlAkuWlkk72",
+            "updatedAt": "Timestamp(2026-07-02T09:53:42.400Z)",
+            "education": "Btech",
+            "expertise": [
+              "career"
+            ],
+            "reviewCount": 0,
+            "source": "users",
+            "bio": "I m tech enthusiast",
+            "yearsOfExperience": 2,
+            "isAvailable": true,
+            "totalSessions": 0,
+            "photoURL": ""
+          }
+        },
+        {
+          "id": "NB4MVxBOGYYkO0PGUrReJTwH6s63",
+          "fields": {
+            "bio": "student",
+            "source": "users",
+            "reviewCount": 0,
+            "expertise": [
+              "career"
+            ],
+            "education": "btech",
+            "photoURL": "",
+            "totalSessions": 0,
+            "isAvailable": true,
+            "yearsOfExperience": 1,
+            "qualification": "btech",
+            "sessionPrice": 129,
+            "isActive": true,
+            "languages": [
+              "english"
+            ],
+            "displayName": "rahul",
+            "domainIds": [
+              "career"
+            ],
+            "updatedAt": "Timestamp(2026-06-22T20:01:13.600Z)",
+            "uid": "NB4MVxBOGYYkO0PGUrReJTwH6s63",
+            "rating": 5,
+            "name": "rahul",
+            "price": 129,
+            "categories": [
+              "peer-buddy"
+            ],
+            "isVerified": true,
+            "domains": [
+              "career"
+            ],
+            "mentorApplicationStatus": "pending"
+          }
+        }
+      ]
+    },
+    "bookings": {
+      "exists": false,
+      "error": "Missing or insufficient permissions."
+    },
+    "sessions": {
+      "exists": false,
+      "error": "Missing or insufficient permissions."
+    },
+    "payments": {
+      "exists": false,
+      "error": "Missing or insufficient permissions."
+    },
+    "community_posts": {
+      "exists": true,
+      "status": "active",
+      "count": 2,
+      "sampleSchema": {
+        "createdAt": "timestamp/date",
+        "tags": "array",
+        "domain": "string",
+        "authorName": "string",
+        "authorId": "string",
+        "title": "string",
+        "upvotes": "number",
+        "content": "string",
+        "commentCount": "number",
+        "isAnonymous": "boolean",
+        "authorPhotoURL": "string"
+      },
+      "samples": [
+        {
+          "id": "5KZ2X425tU6CDXoz3KA7",
+          "fields": {
+            "createdAt": "Timestamp(2026-06-17T11:27:00.320Z)",
+            "tags": [
+              "stress"
+            ],
+            "domain": "stress",
+            "authorName": "Pushkar Singh",
+            "authorId": "nPN0GYJCc1QSlmuO6FABmHmdNng1",
+            "title": "google user test",
+            "upvotes": 0,
+            "content": "testing normal post",
+            "commentCount": 1,
+            "isAnonymous": false,
+            "authorPhotoURL": ""
+          }
+        },
+        {
+          "id": "Cnk7Z9Vs91PFTyqgvWAT",
+          "fields": {
+            "upvotes": 1,
+            "content": "is chico still Chad? ",
+            "isAnonymous": false,
+            "commentCount": 0,
+            "authorPhotoURL": "",
+            "authorName": "Anonymous User",
+            "authorId": "OgY8OQup2eSvGcZ1L6RjhESECZO2",
+            "title": "CHAD",
+            "upvoters": [
+              "nPN0GYJCc1QSlmuO6FABmHmdNng1"
+            ],
+            "tags": [
+              "motivation"
+            ],
+            "domain": "motivation",
+            "createdAt": "Timestamp(2026-06-17T09:41:02.525Z)"
+          }
+        }
+      ]
+    },
+    "community_comments": {
+      "exists": true,
+      "status": "active",
+      "count": 2,
+      "sampleSchema": {
+        "authorName": "string",
+        "createdAt": "timestamp/date",
+        "authorId": "string",
+        "postId": "string",
+        "content": "string",
+        "upvotes": "number",
+        "isAnonymous": "boolean",
+        "authorPhotoURL": "string"
+      },
+      "samples": [
+        {
+          "id": "5B8YuOzcTZDxMkkvtYMc",
+          "fields": {
+            "authorName": "Anonymous User",
+            "createdAt": "Timestamp(2026-06-17T11:53:40.494Z)",
+            "authorId": "X8MRomHNtqbo3EExiTwC9tzCKPv2",
+            "postId": "H57mWwNUKWVqJcqr30wT",
+            "content": "snvadnvadknv",
+            "upvotes": 0,
+            "isAnonymous": false,
+            "authorPhotoURL": ""
+          }
+        },
+        {
+          "id": "J3snMlgn1lDTkdfY0yVf",
+          "fields": {
+            "authorPhotoURL": "",
+            "isAnonymous": true,
+            "upvotes": 0,
+            "content": "saikeeeeee",
+            "postId": "bsbkcuV582tqm9qGOrA1",
+            "authorId": "LzLijELPNMSLbLejbH1nLkSxi9m1",
+            "createdAt": "Timestamp(2026-06-17T11:23:33.207Z)",
+            "authorName": "Anonymous"
+          }
+        }
+      ]
+    },
+    "notifications": {
+      "exists": false,
+      "error": "Missing or insufficient permissions."
+    },
+    "reports": {
+      "exists": false,
+      "error": "Missing or insufficient permissions."
+    },
+    "mentor_reviews": {
+      "exists": true,
+      "status": "empty",
+      "documents": []
+    },
+    "guide_slots": {
+      "exists": true,
+      "status": "active",
+      "count": 2,
+      "sampleSchema": {
+        "price": "number",
+        "time": "string",
+        "isBooked": "boolean",
+        "duration": "number",
+        "isBlocked": "boolean",
+        "createdAt": "timestamp/date",
+        "category": "string",
+        "date": "string",
+        "guideId": "string",
+        "isActive": "boolean"
+      },
+      "samples": [
+        {
+          "id": "1vQgFA8e79aIPHwsCb15",
+          "fields": {
+            "price": 1,
+            "time": "10:00",
+            "isBooked": false,
+            "duration": 30,
+            "isBlocked": false,
+            "createdAt": "Timestamp(2026-06-07T10:49:56.705Z)",
+            "category": "peer-buddy",
+            "date": "2026-07-02",
+            "guideId": "0NuxxdUzboNhla9D4tlAkuWlkk72",
+            "isActive": true
+          }
+        },
+        {
+          "id": "26nDKux93PXgQUsvBece",
+          "fields": {
+            "isBlocked": false,
+            "duration": 30,
+            "isBooked": false,
+            "time": "15:30",
+            "price": 129,
+            "isActive": true,
+            "guideId": "QDO1yJQwpmhJ91JFVd2yWXMQWtB3",
+            "date": "2026-06-26",
+            "category": "peer-buddy",
+            "createdAt": "Timestamp(2026-06-26T09:40:19.324Z)"
+          }
+        }
+      ]
+    }
+  }
+}
