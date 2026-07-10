@@ -594,6 +594,44 @@ input, button, select, textarea {
   font-size: 0.875rem;
 }
 
+.login-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--clr-text-subtle);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: var(--sp-4) 0;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.login-divider:not(:empty)::before {
+  margin-right: var(--sp-3);
+}
+
+.login-divider:not(:empty)::after {
+  margin-left: var(--sp-3);
+}
+
+.btn-google {
+  background-color: var(--clr-bg-card);
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  transition: var(--transition);
+}
+
+.btn-google:hover {
+  background-color: var(--clr-bg-alt);
+  border-color: var(--clr-text-subtle);
+}
+
 /* Modals */
 .modal-overlay {
   position: fixed;
