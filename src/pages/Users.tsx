@@ -18,9 +18,7 @@ import {
   Shield,
   Ban,
   CheckCircle,
-  ShieldAlert,
   Download,
-  ChevronRight,
 } from 'lucide-react';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -82,12 +80,7 @@ function toISOForSort(raw: unknown): string {
   return String(raw);
 }
 
-/** student → mentor → admin → student */
-function nextRole(current: string): string {
-  if (current === 'student') return 'mentor';
-  if (current === 'mentor') return 'admin';
-  return 'student';
-}
+
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -140,7 +133,6 @@ export const Users: React.FC = () => {
 
   // Confirm dialogs
   const [suspendTarget, setSuspendTarget] = useState<UserRecord | null>(null);
-  const [roleTarget, setRoleTarget] = useState<UserRecord | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
 
   // ── Debounce search ────────────────────────────────────────────────────────
@@ -266,27 +258,7 @@ export const Users: React.FC = () => {
     }
   };
 
-  // ── Change Role ────────────────────────────────────────────────────────────
 
-  const handleConfirmRoleChange = async () => {
-    if (!roleTarget || !db) return;
-    setActionLoading(true);
-    try {
-      const newRole = nextRole(roleTarget.role);
-      await updateDoc(doc(db, 'users', roleTarget.uid), { role: newRole });
-      showToast(
-        `${roleTarget.displayName}'s role changed to ${newRole}.`,
-        'success'
-      );
-      setRoleTarget(null);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Operation failed.';
-      console.error('Error changing user role:', err);
-      showToast(msg, 'error');
-    } finally {
-      setActionLoading(false);
-    }
-  };
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -489,17 +461,7 @@ export const Users: React.FC = () => {
                         <span>{user.isSuspended ? 'Activate' : 'Suspend'}</span>
                       </button>
 
-                      {/* Change Role */}
-                      <button
-                        className="btn btn-outline"
-                        style={{ fontSize: '0.75rem', padding: '4px 8px' }}
-                        title={`Cycle role: ${user.role} → ${nextRole(user.role)}`}
-                        onClick={() => setRoleTarget(user)}
-                      >
-                        <ShieldAlert size={12} />
-                        <span>Change Role</span>
-                        <ChevronRight size={11} style={{ opacity: 0.5 }} />
-                      </button>
+
                     </div>
                   </td>
                 </tr>
@@ -534,24 +496,7 @@ export const Users: React.FC = () => {
         }}
       />
 
-      {/* ── Confirm: Change Role ── */}
-      <ConfirmDialog
-        isOpen={roleTarget !== null}
-        variant="warning"
-        loading={actionLoading}
-        title="Change User Role"
-        message={
-          roleTarget
-            ? `This will change ${roleTarget.displayName}'s role from "${roleTarget.role}" to "${nextRole(roleTarget.role)}". Role changes take effect immediately and alter their platform permissions.`
-            : ''
-        }
-        confirmLabel="Yes, Change Role"
-        cancelLabel="Cancel"
-        onConfirm={handleConfirmRoleChange}
-        onCancel={() => {
-          if (!actionLoading) setRoleTarget(null);
-        }}
-      />
+
     </div>
   );
 };

@@ -12,13 +12,12 @@ import {
   SortableTh,
 } from '../components/DataTable';
 import { ConfirmDialog } from '../components/ConfirmDialog';
-import { Modal } from '../components/Modal';
+
 import { SkeletonTable } from '../components/Skeleton';
 import {
   GraduationCap,
   Star,
   Download,
-  Edit,
   Power,
 } from 'lucide-react';
 
@@ -60,9 +59,6 @@ export const Mentors: React.FC = () => {
   const [page, setPage] = useState(1);
 
   // Modals & Action Dialogs
-  const [selectedMentor, setSelectedMentor] = useState<MentorRecord | null>(null);
-  const [isPriceModalOpen, setIsPriceModalOpen] = useState(false);
-  const [newPrice, setNewPrice] = useState(399);
 
   const [statusTarget, setStatusTarget] = useState<MentorRecord | null>(null);
   const [actionLoading, setActionLoading] = useState(false);
@@ -167,28 +163,7 @@ export const Mentors: React.FC = () => {
     showToast(`Exported ${rows.length} mentors to CSV.`, 'success');
   };
 
-  // ── Update Pricing ─────────────────────────────────────────────────────────
 
-  const handleUpdatePrice = async () => {
-    if (!selectedMentor || !db) return;
-    setActionLoading(true);
-    try {
-      const guideRef = doc(db, 'guides', selectedMentor.uid);
-      await updateDoc(guideRef, {
-        price: newPrice,
-        sessionPrice: newPrice,
-      });
-      showToast(`Pricing updated successfully for ${selectedMentor.displayName}.`, 'success');
-      setIsPriceModalOpen(false);
-      setSelectedMentor(null);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Operation failed.';
-      console.error('Error updating pricing:', err);
-      showToast(msg, 'error');
-    } finally {
-      setActionLoading(false);
-    }
-  };
 
   // ── Toggle Active Status ───────────────────────────────────────────────────
 
@@ -199,6 +174,11 @@ export const Mentors: React.FC = () => {
       const nextActive = !statusTarget.isActive;
       const guideRef = doc(db, 'guides', statusTarget.uid);
       await updateDoc(guideRef, {
+        isActive: nextActive,
+      });
+      // Synchronize to users collection
+      const userRef = doc(db, 'users', statusTarget.uid);
+      await updateDoc(userRef, {
         isActive: nextActive,
       });
       showToast(
@@ -415,19 +395,7 @@ export const Mentors: React.FC = () => {
                     {/* Actions */}
                     <td>
                       <div style={{ display: 'flex', gap: 'var(--sp-2)', flexWrap: 'nowrap' }}>
-                        {/* Adjust pricing button */}
-                        <button
-                          className="btn btn-outline"
-                          style={{ fontSize: '0.75rem', padding: '4px 8px' }}
-                          onClick={() => {
-                            setSelectedMentor(mentor);
-                            setNewPrice(mentor.price);
-                            setIsPriceModalOpen(true);
-                          }}
-                        >
-                          <Edit size={12} />
-                          <span>Edit Price</span>
-                        </button>
+
 
                         {/* Toggle active profile */}
                         <button
@@ -453,65 +421,7 @@ export const Mentors: React.FC = () => {
         </TableWrapper>
       )}
 
-      {/* ── Adjust pricing Modal ── */}
-      {selectedMentor && (
-        <Modal
-          isOpen={isPriceModalOpen}
-          onClose={() => {
-            if (!actionLoading) {
-              setIsPriceModalOpen(false);
-              setSelectedMentor(null);
-            }
-          }}
-          title="Adjust Session Pricing"
-          footer={
-            <div style={{ display: 'flex', gap: 'var(--sp-3)', justifyContent: 'flex-end', width: '100%' }}>
-              <button
-                className="btn btn-secondary"
-                onClick={() => {
-                  setIsPriceModalOpen(false);
-                  setSelectedMentor(null);
-                }}
-                disabled={actionLoading}
-              >
-                Cancel
-              </button>
-              <button
-                className="btn btn-primary"
-                onClick={handleUpdatePrice}
-                disabled={actionLoading || newPrice < 99}
-              >
-                {actionLoading ? 'Updating...' : 'Update Price'}
-              </button>
-            </div>
-          }
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sp-4)' }}>
-            <p className="body-sm text-muted">
-              Configure the single session pricing for <strong>{selectedMentor.displayName}</strong>.
-              This price will apply to all future bookings scheduled by students.
-            </p>
-            <div className="form-group">
-              <label className="form-label" htmlFor="price-amount-input">
-                Session Price (in INR)
-              </label>
-              <input
-                id="price-amount-input"
-                type="number"
-                min={99}
-                max={2999}
-                className="form-input"
-                value={newPrice}
-                onChange={(e) => setNewPrice(Number(e.target.value))}
-                disabled={actionLoading}
-              />
-              <span className="body-sm text-muted" style={{ fontSize: '0.72rem', marginTop: 4 }}>
-                Must be between ₹99 and ₹2,999.
-              </span>
-            </div>
-          </div>
-        </Modal>
-      )}
+
 
       {/* ── Confirm: Toggle Active Status ── */}
       <ConfirmDialog
